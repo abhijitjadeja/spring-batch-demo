@@ -4,7 +4,7 @@ pipeline {
         stage('build') {
             steps {
                 script{
-                    sh "docker build -t spring-batch-demo:1"
+                    sh "docker build . -t spring-batch-demo:1"
                 }
             }
         }
