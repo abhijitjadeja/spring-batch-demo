@@ -1,9 +1,11 @@
 pipeline {
     agent any 
     stages {
-        stage('Stage 1') {
+        stage('build') {
             steps {
-                echo 'Hello world!' 
+                script{
+                    sh "docker build -t spring-batch-demo:1"
+                }
             }
         }
     }
