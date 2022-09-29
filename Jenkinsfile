@@ -4,9 +4,14 @@ pipeline {
         maven 'maven' 
         jdk 'jdk17' 
     }
+    parameters {
+          string(name: 'gitUrl', defaultValue: 'none', description: 'git url')
+    }
     stages {
+        
         stage ('Build') {
             steps {
+                git $gitUrl
                 sh 'mvn -Dmaven.test.failure.ignore=true install' 
             }
             post {
