@@ -12,8 +12,8 @@ pipeline {
     stages {
         stage('checkout'){
             steps{
-                sh 'echo ${params.gitUrl}'
-                sh 'echo ${params.tag}'
+                echo '${params.gitUrl}'
+                echo '${params.tag}'
                 deleteDir()
                 checkout([$class: 'GitSCM',
                 branches: [[name: '${params.tag}']],
