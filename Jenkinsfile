@@ -21,8 +21,8 @@ pipeline {
                 echo "${params.tag}"
                 deleteDir()
                 checkout([$class: 'GitSCM',
-                branches: [[name: '${params.tag}']],
-                userRemoteConfigs: [[url: '${params.gitUrl}']]])                
+                branches: [[name: "${params.tag}"]],
+                userRemoteConfigs: [[url: "${params.gitUrl}"]]])                
             }
         
         }
