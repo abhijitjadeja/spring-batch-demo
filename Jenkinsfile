@@ -21,8 +21,6 @@ pipeline {
         }
         stage ('Build') {
             steps {
-                git '${params.gitUrl}'
-                git checkout '${params.tag}'
                 sh 'mvn -Dmaven.test.failure.ignore=true install' 
             }
             post {
