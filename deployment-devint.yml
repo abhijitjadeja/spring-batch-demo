@@ -10,6 +10,6 @@ spec:
         spec:
           containers:
           - name: spring-batch-demo
-            image: localhost:5000/spring-batch-demo:latest
+            image: spring-batch-demo:local
             imagePullPolicy: IfNotPresent
           restartPolicy: OnFailure
