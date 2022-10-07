@@ -7,6 +7,7 @@ pipeline {
     parameters {
         string(name: 'gitUrl', defaultValue: 'https://github.com/abhijitjadeja/spring-batch-demo.git', description: 'git url')
         string(name: 'tag', defaultValue: '*/master', description: 'git tag')
+        string(name: 'version',defaultValue:'1.0',description:'buildVersion')
     }
     stages {
         stage('checkout'){
@@ -28,10 +29,9 @@ pipeline {
                 }
             }
         }       
-        stage('build container') {
+        stage('build container and push to the repository') {
             steps {
                 def appImage = docker.build("batch/spring-batch-demo:${params.version}")
-                //appImage.push()
             }
         }
     }
