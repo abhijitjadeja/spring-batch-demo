@@ -30,9 +30,8 @@ pipeline {
         }       
         stage('build container') {
             steps {
-                script{
-                    sh "docker build . -t spring-batch-demo:1"
-                }
+                def appImage = docker.build("batch/spring-batch-demo:${params.version}")
+                //appImage.push()
             }
         }
     }
