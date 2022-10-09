@@ -12,26 +12,22 @@ spec:
           - name: spring-batch-demo
             image: sleepingm/spring-batch-demo:1.0
             imagePullPolicy: IfNotPresent
-          restartPolicy: OnFailure
             env:
-        # Define the environment variable
-        - name: SERVICE_URL # Notice that the case is different here
-                                     # from the key name in the ConfigMap.
-          valueFrom:
-            configMapKeyRef:
-              name: spring-batch-demo           # The ConfigMap this value comes from.
-              key: service.url # The key to fetch
-      volumeMounts:
-      - name: config
-        mountPath: "/config"
-        readOnly: true
-  volumes:
-    # You set volumes at the Pod level, then mount them into containers inside that Pod
-    - name: config
-      configMap:
-        # Provide the name of the ConfigMap you want to mount.
-        name: spring-batch-demo
-        # An array of keys from the ConfigMap to create as files
-        items:
-        - key: "service.properties"
-          path: "service.properties"
+            - name: SERVICE_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: spring-batch-demo         
+                  key: service.url # The key to fetch
+            volumeMounts:
+            - name: config
+              mountPath: "/config"
+              readOnly: true
+           volumes:
+           - name: config
+             configMap:
+             # Provide the name of the ConfigMap you want to mount.
+               name: spring-batch-demo
+               # An array of keys from the ConfigMap to create as files
+               items:
+               - key: "service.properties"
+                 path: "service.properties"
