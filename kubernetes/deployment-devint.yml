@@ -9,25 +9,25 @@ spec:
       template:
         spec:
           containers:
-          - name: spring-batch-demo
-            image: sleepingm/spring-batch-demo:1.0
-            imagePullPolicy: IfNotPresent
-            env:
-            - name: SERVICE_URL
-              valueFrom:
-                configMapKeyRef:
-                  name: spring-batch-demo         
-                  key: service.url # The key to fetch
-            volumeMounts:
+            - name: spring-batch-demo
+              image: sleepingm/spring-batch-demo:1.0
+              imagePullPolicy: IfNotPresent
+              env:
+                - name: SERVICE_URL
+                  valueFrom:
+                    configMapKeyRef:
+                      name: spring-batch-demo
+                      key: service.url # The key to fetch
+              volumeMounts:
+                - name: config
+                  mountPath: "/config"
+                  readOnly: true
+          volumes:
             - name: config
-              mountPath: "/config"
-              readOnly: true
-           volumes:
-           - name: config
-             configMap:
-             # Provide the name of the ConfigMap you want to mount.
-               name: spring-batch-demo
-               # An array of keys from the ConfigMap to create as files
-               items:
-               - key: "service.properties"
-                 path: "service.properties"
+              configMap:
+                # Provide the name of the ConfigMap you want to mount.
+                name: spring-batch-demo
+                # An array of keys from the ConfigMap to create as files
+                items:
+                  - key: "service.properties"
+                    path: "service.properties"

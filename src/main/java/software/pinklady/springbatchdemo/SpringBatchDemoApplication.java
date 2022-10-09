@@ -33,6 +33,7 @@ public class SpringBatchDemoApplication {
 							ChunkContext chunkContext) {
 								try{
 								Thread.sleep(5000);
+								System.out.println("Service URL:"+System.getProperty("SERVICE_URL"));
 								}
 								catch(Exception e){}
 								System.out.println("This is where some job will run");
