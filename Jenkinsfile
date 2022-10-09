@@ -34,7 +34,7 @@ pipeline {
             steps{
                 script{
                     docker.withRegistry('', 'docker-login') {
-                        docker.build("sleepingm/spring-batch-demo:${params.version}").push()
+                        docker.build("sleepingm/${params.name}:${params.version}").push()
                     }
                 }
             }
