@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import java.io.*;
+import java.util.Properties;
 
 @EnableBatchProcessing
 @SpringBootApplication
@@ -34,6 +36,11 @@ public class SpringBatchDemoApplication {
 								try{
 								Thread.sleep(5000);
 								System.out.println("Service URL:"+System.getenv("SERVICE_URL"));
+								try(FileReader f = new FileReader("/config/service.properties")){ 
+                                 Properties p = new Properties();
+								 p.load(f);
+								 System.out.println("Service Properties service1.url "+p.getProperty("service1.url"));
+								}
 								}
 								catch(Exception e){}
 								System.out.println("This is where some job will run");
