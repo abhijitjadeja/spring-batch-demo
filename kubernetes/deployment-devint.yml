@@ -23,8 +23,13 @@ spec:
                 - name: config
                   mountPath: "/config"
                   readOnly: true
+                - name: batch-volume
+                  mountPath: "/batch"
           restartPolicy: Never
           volumes:
+            - name: batch-volume
+              hostPath:
+                path: /home/jadejaan/batch-volume
             - name: config
               configMap:
                 # Provide the name of the ConfigMap you want to mount.

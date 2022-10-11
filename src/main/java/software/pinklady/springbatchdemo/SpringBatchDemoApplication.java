@@ -27,7 +27,7 @@ public class SpringBatchDemoApplication {
 	private StepBuilderFactory stepBuilderFactory;
 
 	@Value("${myservice.url}")
-    private String myserviceUrl;
+        private String myserviceUrl;
 
 	@Bean
 	public Step step() {
@@ -36,18 +36,24 @@ public class SpringBatchDemoApplication {
 					@Override
 					public RepeatStatus execute(StepContribution contribution,
 							ChunkContext chunkContext) {
-								try{
-								Thread.sleep(5000);
-								System.out.println("Service URL:"+System.getenv("SERVICE_URL"));
-								System.out.println("My service URL:"+myserviceUrl);
-								try(FileReader f = new FileReader("/config/service.properties")){ 
-                                 Properties p = new Properties();
-								 p.load(f);
-								 System.out.println("Service Properties service1.url "+p.getProperty("service1.url"));
-								}
-								}
-								catch(Exception e){}
-								System.out.println("This is where some job will run");
+							  try{
+							    Thread.sleep(5000);
+							    System.out.println("Service URL:"+System.getenv("SERVICE_URL"));
+						       	    System.out.println("My service URL:"+myserviceUrl);
+							    try(FileReader f = new FileReader("/config/service.properties")) { 
+                                                              Properties p = new Properties();
+							      p.load(f);
+							      System.out.println("Service Properties service1.url "+p.getProperty("service1.url"));
+							    }
+							    try(BufferedReader f = new BufferedReader(new FileReader("/batch/input.txt"))){
+                                                              String st;
+							      while ((st = f.readLine())!=null) {
+								System.out.println(st);
+							      }
+							    }
+                                                          }
+							  catch(Exception e){}
+							  System.out.println("This is where some job will run");
 						return RepeatStatus.FINISHED;
 					}
 				}).build();
