@@ -6,4 +6,4 @@ WORKDIR /tmp
 # copy over the built artifact from the maven image
 COPY target/*.jar /tmp/app.jar
 
-ENTRYPOINT ["java","-jar","-Dservice.url=\"$SERVICE_URL\"","/tmp/app.jar"]
+ENTRYPOINT ["java","-jar","-Dservice.url=$SERVICE_URL","/tmp/app.jar"]
