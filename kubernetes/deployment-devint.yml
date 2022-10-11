@@ -3,7 +3,8 @@ kind: CronJob
 metadata:
   name: spring-batch-demo
 spec:
-  schedule: "* * * * *"
+  schedule: "*/5 * * * *"
+  concurrencyPolicy: Forbid  
   jobTemplate:
     spec:
       template:
@@ -11,7 +12,7 @@ spec:
           containers:
             - name: spring-batch-demo
               image: sleepingm/spring-batch-demo:1.0
-              imagePullPolicy: IfNotPresent
+              imagePullPolicy: Always
               env:
                 - name: SERVICE_URL
                   valueFrom:
