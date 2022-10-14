@@ -13,9 +13,6 @@ pipeline {
     }
     stages {
         stage('checkout'){
-            when{
-                expression { params.region == 'devint' }
-            }
             steps{
                 deleteDir()
                 checkout([$class: 'GitSCM',
