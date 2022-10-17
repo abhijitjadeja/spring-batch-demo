@@ -52,7 +52,8 @@ pipeline {
             }
             steps{
                 script{
-                 sh "kubectl apply -f kubeconfig/${params.region}"
+                 //sh "kubectl apply -f kubeconfig/${params.region}"
+                 sh "kubectl apply -k kustomize/overlays/${params.region}"
                 }
             }
         }
