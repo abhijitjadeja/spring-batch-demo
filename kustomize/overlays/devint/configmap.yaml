@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: spring-batch-demo
+data:
+  # property-like keys; each key maps to a simple value
+  service.url: "https://service.int.mycorporation.com/myservice"
+  service.properties: |
+    service.url=https://service.int.mycorporation.com/myservice
+    service1.url=https://service-1.int.mycorporation.com/myservice   

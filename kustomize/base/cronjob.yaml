@@ -1,0 +1,47 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: spring-batch-demo
+spec:
+  schedule: "*/40 * * * *"
+  concurrencyPolicy: Forbid  
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: spring-batch-demo
+              image: sleepingm/spring-batch-demo:1.0
+              resources:
+                requests:
+                  memory: "64M"
+                  cpu: "250m"
+                limits:
+                  memory: "256M"
+                  cpu: "1000m"  
+              imagePullPolicy: Always
+              env:
+                - name: SERVICE_URL
+                  valueFrom:
+                    configMapKeyRef:
+                      name: spring-batch-demo
+                      key: service.url # The key to fetch
+              volumeMounts:
+                - name: config
+                  mountPath: "/config"
+                  readOnly: true
+                - name: batch-volume
+                  mountPath: "/batch"
+          restartPolicy: Never
+          volumes:
+            - name: batch-volume
+              hostPath:
+                path: /home/jadejaan/batch-volume
+            - name: config
+              configMap:
+                # Provide the name of the ConfigMap you want to mount.
+                name: spring-batch-demo
+                # An array of keys from the ConfigMap to create as files
+                items:
+                  - key: "service.properties"
+                    path: "service.properties"
