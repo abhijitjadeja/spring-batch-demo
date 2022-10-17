@@ -11,7 +11,7 @@ spec:
         spec:
           containers:
             - name: spring-batch-demo
-              image: sleepingm/spring-batch-demo:1.0
+              image: sleepingm/spring-batch-demo:latest
               resources:
                 requests:
                   memory: "64M"

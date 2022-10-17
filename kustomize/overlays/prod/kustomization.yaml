@@ -3,3 +3,6 @@ bases:
 patchesStrategicMerge:
   - cronjob-schedule.yaml
   - configmap.yaml
+images:
+  - name: sleepingm/spring-batch-demo
+    newTag: '1.0'
